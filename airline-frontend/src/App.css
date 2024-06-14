@@ -1,0 +1,49 @@
+body {
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.navbar {
+  background-color: #003366 !important;
+  border-color: #003366 !important;
+}
+
+.navbar-brand, .nav-link {
+  color: #ffffff !important;
+}
+
+.form-control {
+  background-color: #ffffff !important;
+  border-color: #cccccc !important;
+  color: #000 !important;
+}
+
+.form-control::placeholder {
+  color: #999 !important;
+}
+
+h2 {
+  color: #ffffff !important;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-primary {
+  background-color: #0055a5 !important;
+  border-color: #0055a5 !important;
+}
