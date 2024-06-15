@@ -14,12 +14,14 @@ router.get("/", async (req, res) => {
 
 // Create a user
 router.post("/", async (req, res) => {
-  const user = new User(req.body);
   try {
-    const newUser = await user.save();
+    const { firstName, lastName, email, phone, address } = req.body;
+    const newUser = new User({ firstName, lastName, email, phone, address });
+    await newUser.save();
     res.status(201).json(newUser);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 

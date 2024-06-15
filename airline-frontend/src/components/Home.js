@@ -19,6 +19,26 @@ const airports = [
   { value: "COK", label: "Kochi, Kerala" },
 ];
 
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    color: "black",
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "black",
+  }),
+  menu: (provided) => ({
+    ...provided,
+    color: "black",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    color: "black",
+    backgroundColor: state.isSelected ? "#e6e6e6" : "#fff",
+  }),
+};
+
 const Home = () => {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
@@ -31,12 +51,19 @@ const Home = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(
-        "http://localhost:3000/api/flightRoutes",
+      const data = {
+        origin,
+        destination,
+        departure,
+      };
+
+      const response = await axios.post(
+        "http://localhost:5000/api/flightRoutes",
         {
-          params: { origin, destination, departure },
+          data,
         }
       );
+      console.log(response);
       setFlights(response.data);
     } catch (error) {
       console.error("Error searching flights:", error);
@@ -58,6 +85,7 @@ const Home = () => {
             value={airports.find((airport) => airport.value === origin)}
             onChange={(selectedOption) => setOrigin(selectedOption.value)}
             placeholder="Origin"
+            styles={customStyles}
           />
         </Form.Group>
         <Form.Group>
@@ -67,6 +95,7 @@ const Home = () => {
             value={airports.find((airport) => airport.value === destination)}
             onChange={(selectedOption) => setDestination(selectedOption.value)}
             placeholder="Destination"
+            styles={customStyles}
           />
         </Form.Group>
         <Form.Group>

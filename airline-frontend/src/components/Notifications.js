@@ -7,13 +7,12 @@ const Notifications = () => {
 
   const handleSetNotification = (e) => {
     e.preventDefault();
-    // Implement notification setup functionality here
+
     console.log({ notificationType, contactMethod });
   };
 
   return (
     <div>
-      <h2>Notifications</h2>
       <Form onSubmit={handleSetNotification}>
         <Form.Group>
           <Form.Label>Notification Type</Form.Label>

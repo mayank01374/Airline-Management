@@ -11,15 +11,19 @@ const UserProfile = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.post("/api/users", {
+      const data = {
         firstname,
         lastname,
         email,
         phone,
         address,
+      };
+      const response = await axios.post("http://localhost:5000/api/users", {
+        data,
       });
-      console.log(response.data);
+      console.log(response);
     } catch (err) {
       console.error(err);
     }

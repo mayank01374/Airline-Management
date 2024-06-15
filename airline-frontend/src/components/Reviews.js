@@ -12,7 +12,7 @@ const Reviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get("/api/reviews");
+        const response = await axios.get("http://localhost:5000/api/reviews");
         setReviews(response.data);
       } catch (err) {
         console.error(err);
@@ -26,7 +26,10 @@ const Reviews = () => {
     e.preventDefault();
     try {
       const newReview = { airline, review, rating };
-      const response = await axios.post("/api/reviews", newReview);
+      const response = await axios.post(
+        "http://localhost:5000/api/reviews",
+        newReview
+      );
       setReviews([...reviews, response.data]);
       setAirline("");
       setReview("");

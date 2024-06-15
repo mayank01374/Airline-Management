@@ -26,9 +26,6 @@ const AppNavbar = () => {
           <Nav.Link as={Link} to="/notifications">
             Notifications
           </Nav.Link>
-          <Nav.Link as={Link} to="/book-flight">
-            Book Flight
-          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
