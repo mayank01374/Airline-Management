@@ -13,14 +13,23 @@ This project is an airline management and booking application that streamlines f
 ## Features
 
 - **Flight Search and Booking**: Users can search for flights based on their destination, travel dates, and preferences.
+  
   ![Screenshot 2024-06-15 182915](https://github.com/mayank01374/Airline-Management/assets/133500570/e05d48be-c72d-4c4d-b6fe-61b2cd12c5da)
+  
 - **User Profiles**: Users can create profiles to store personal information, travel preferences, and past booking history.
+ 
   ![Screenshot 2024-06-15 183048](https://github.com/mayank01374/Airline-Management/assets/133500570/cbcad324-ecfd-495b-aeea-0ff670bc107e)
+  
 - **Real-time Flight Information**: Provides real-time updates on flight availability, schedules, and prices.
+  
 - **Reviews and Ratings**: Users can leave reviews and ratings for airlines and flights they have booked.
+  
   ![Screenshot 2024-06-15 183227](https://github.com/mayank01374/Airline-Management/assets/133500570/8bc2fa98-f0df-4ef4-bdc0-73820ee65b2e)
+  
 - **Notification System**: Sends alerts and reminders about upcoming flights, check-in deadlines, and other important travel-related information.
+  
   ![Screenshot 2024-06-15 183344](https://github.com/mayank01374/Airline-Management/assets/133500570/bc476a22-62d6-458c-beee-56f837161fd6)
+  
 
 ## Setup and Installation
 
