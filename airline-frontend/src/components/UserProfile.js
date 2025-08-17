@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import axios from "axios";
 
 const UserProfile = () => {
@@ -8,30 +8,70 @@ const UserProfile = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleUpdate = async (e) => {
     e.preventDefault();
 
+    if (!firstname || !lastname || !email || !phone || !address) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
     try {
       const data = {
-        firstname,
-        lastname,
+        firstName: firstname,
+        lastName: lastname,
         email,
         phone,
         address,
       };
-      const response = await axios.post("http://localhost:5000/api/users", {
-        data,
-      });
-      console.log(response);
+
+      const response = await axios.post(
+        "http://localhost:5000/api/users",
+        data
+      );
+      console.log("Profile update response:", response.data);
+      setSuccess("Profile updated successfully!");
+
+      // Clear form after successful update
+      setFirstname("");
+      setLastname("");
+      setEmail("");
+      setPhone("");
+      setAddress("");
     } catch (err) {
-      console.error(err);
+      console.error("Error updating profile:", err);
+      setError(
+        err.response?.data?.message ||
+          "Failed to update profile. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div>
       <h2>User Profile</h2>
+
+      {error && (
+        <Alert variant="danger" dismissible onClose={() => setError("")}>
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert variant="success" dismissible onClose={() => setSuccess("")}>
+          {success}
+        </Alert>
+      )}
+
       <Form onSubmit={handleUpdate}>
         <Row>
           <Col>
@@ -42,6 +82,7 @@ const UserProfile = () => {
                 placeholder="Enter your first name"
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)}
+                required
               />
             </Form.Group>
           </Col>
@@ -53,6 +94,7 @@ const UserProfile = () => {
                 placeholder="Enter your last name"
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)}
+                required
               />
             </Form.Group>
           </Col>
@@ -64,6 +106,7 @@ const UserProfile = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </Form.Group>
         <Form.Group>
@@ -73,6 +116,7 @@ const UserProfile = () => {
             placeholder="Enter your Phone No"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            required
           />
         </Form.Group>
         <Form.Group>
@@ -83,10 +127,11 @@ const UserProfile = () => {
             placeholder="Enter your Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+            required
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Update Profile
+        <Button variant="primary" type="submit" disabled={loading}>
+          {loading ? "Updating..." : "Update Profile"}
         </Button>
       </Form>
     </div>

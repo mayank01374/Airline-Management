@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Button, Card, Alert, Row, Col, Badge } from "react-bootstrap";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const airports = [
   { value: "BLR", label: "Bengaluru, Karnataka" },
@@ -43,138 +43,264 @@ const Home = () => {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [departure, setDeparture] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+  const [tripType, setTripType] = useState("oneWay");
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [flights, setFlights] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSearch = async (e) => {
     e.preventDefault();
+
+    if (!origin || !destination || !departure) {
+      setError("Please fill in all required fields");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
     try {
       const data = {
         origin,
         destination,
         departure,
+        returnDate: tripType === "roundTrip" ? returnDate : null,
+        tripType,
+        adults,
+        children,
       };
 
       const response = await axios.post(
         "http://localhost:5000/api/flightRoutes",
-        {
-          data,
-        }
+        data
       );
-      console.log(response);
+
       setFlights(response.data);
     } catch (error) {
-      console.error("Error searching flights:", error);
+      setError(
+        error.response?.data?.message ||
+          "Failed to search flights. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleBook = (flight) => {
-    navigate("/book-flight", { state: { flight } });
-  };
-
   return (
-    <div>
-      <h2>Search Flights</h2>
-      <Form onSubmit={handleSearch}>
-        <Form.Group>
-          <Form.Label>From</Form.Label>
-          <Select
-            options={airports}
-            value={airports.find((airport) => airport.value === origin)}
-            onChange={(selectedOption) => setOrigin(selectedOption.value)}
-            placeholder="Origin"
-            styles={customStyles}
+    <div className="container mt-5">
+      <Card className="p-4 rounded-4 shadow-lg flight-search-card">
+        <h5 className="mb-4 fw-bold text-primary">✈️ Book a flight</h5>
+
+        <div className="mb-3 d-flex gap-4 justify-content-start">
+          <Form.Check
+            inline
+            label="One Way"
+            name="tripType"
+            type="radio"
+            id="trip-oneway"
+            checked={tripType === "oneWay"}
+            onChange={() => setTripType("oneWay")}
           />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>To</Form.Label>
-          <Select
-            options={airports}
-            value={airports.find((airport) => airport.value === destination)}
-            onChange={(selectedOption) => setDestination(selectedOption.value)}
-            placeholder="Destination"
-            styles={customStyles}
+          <Form.Check
+            inline
+            label="Round Trip"
+            name="tripType"
+            type="radio"
+            id="trip-roundtrip"
+            checked={tripType === "roundTrip"}
+            onChange={() => setTripType("roundTrip")}
           />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Departure Date</Form.Label>
-          <Form.Control
-            type="date"
-            value={departure}
-            onChange={(e) => setDeparture(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Adults</Form.Label>
-          <div>
+        </div>
+
+        <Form onSubmit={handleSearch}>
+          <Row className="gy-3">
+            <Col md={6}>
+              <Form.Label>From</Form.Label>
+              <Select
+                options={airports}
+                value={airports.find((a) => a.value === origin)}
+                onChange={(opt) => setOrigin(opt.value)}
+                placeholder="Departure city"
+                styles={customStyles}
+              />
+            </Col>
+
+            <Col md={6}>
+              <Form.Label>To</Form.Label>
+              <Select
+                options={airports}
+                value={airports.find((a) => a.value === destination)}
+                onChange={(opt) => setDestination(opt.value)}
+                placeholder="Arrival city"
+                styles={customStyles}
+              />
+            </Col>
+
+            <Col md={6}>
+              <Form.Label>Departure Date</Form.Label>
+              <Form.Control
+                type="date"
+                value={departure}
+                onChange={(e) => setDeparture(e.target.value)}
+                required
+              />
+            </Col>
+
+            <Col md={6}>
+              <Form.Label>Return Date</Form.Label>
+              <Form.Control
+                type="date"
+                value={returnDate}
+                onChange={(e) => setReturnDate(e.target.value)}
+                disabled={tripType !== "roundTrip"}
+              />
+            </Col>
+
+            <Col md={6}>
+              <Form.Label>Adults</Form.Label>
+              <Form.Control
+                type="number"
+                min="1"
+                value={adults}
+                onChange={(e) => setAdults(Number(e.target.value))}
+              />
+            </Col>
+
+            <Col md={6}>
+              <Form.Label>Children</Form.Label>
+              <Form.Control
+                type="number"
+                min="0"
+                value={children}
+                onChange={(e) => setChildren(Number(e.target.value))}
+              />
+            </Col>
+
+            <Col md={12}>
+              <Form.Label>Promo Code</Form.Label>
+              <Form.Control placeholder="Enter promo code (optional)" />
+            </Col>
+          </Row>
+
+          {error && (
+            <Alert variant="danger" className="mt-3">
+              {error}
+            </Alert>
+          )}
+
+          <div className="d-flex justify-content-end mt-4">
             <Button
-              variant="outline-primary"
-              onClick={() => setAdults(adults + 1)}
+              type="submit"
+              size="lg"
+              variant="primary"
+              disabled={loading}
             >
-              +
-            </Button>
-            <span>{adults}</span>
-            <Button
-              variant="outline-primary"
-              onClick={() => setAdults(adults > 1 ? adults - 1 : 1)}
-            >
-              -
+              {loading ? "🔍 Searching..." : "🔍 Search Flights"}
             </Button>
           </div>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Children</Form.Label>
-          <div>
-            <Button
-              variant="outline-primary"
-              onClick={() => setChildren(children + 1)}
-            >
-              +
-            </Button>
-            <span>{children}</span>
-            <Button
-              variant="outline-primary"
-              onClick={() => setChildren(children > 0 ? children - 1 : 0)}
-            >
-              -
-            </Button>
+        </Form>
+      </Card>
+
+      {/* Flight Results Section */}
+      {flights.length > 0 && (
+        <div className="mt-5">
+          <h4 className="mb-4 text-primary fw-bold fs-3">
+            ✈️ Available Flights ({flights.length})
+          </h4>
+          <div className="row g-4">
+            {flights.map((flight, index) => (
+              <div key={flight._id || index} className="col-12">
+                <Card className="mb-4 p-3 shadow-sm rounded-4">
+                  <Row className="align-items-center">
+                    <Col md={3} className="text-center">
+                      <h5 className="text-primary mb-1">{flight.airline}</h5>
+                      <div className="text-secondary">
+                        {flight.flightNumber}
+                      </div>
+                      <small className="text-secondary">{flight.status}</small>
+                    </Col>
+
+                    <Col md={3} className="text-center">
+                      <div className="fw-bold text-primary">
+                        {flight.departure}
+                      </div>
+                      <div className="text-secondary">Departure</div>
+                      <div className="text-dark">
+                        {new Date(flight.departureTime).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
+                      <div className="text-secondary">
+                        {new Date(flight.departureTime).toLocaleDateString()}
+                      </div>
+                    </Col>
+
+                    <Col md={3} className="text-center">
+                      <div className="fw-bold text-primary">
+                        {flight.arrival}
+                      </div>
+                      <div className="text-secondary">Arrival</div>
+                      <div className="text-dark">
+                        {new Date(flight.arrivalTime).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
+                      <div className="text-secondary">
+                        {new Date(flight.arrivalTime).toLocaleDateString()}
+                      </div>
+                    </Col>
+
+                    <Col md={2} className="text-center">
+                      <div className="fw-bold text-success fs-5">
+                        ₹{flight.price}
+                      </div>
+                      <small className="text-secondary">Price</small>
+                    </Col>
+
+                    <Col md={1} className="text-center">
+                      <Button
+                        variant="outline-primary"
+                        onClick={() =>
+                          navigate("/book-flight", { state: { flight } })
+                        }
+                        className="rounded-pill px-3"
+                      >
+                        Book
+                      </Button>
+                    </Col>
+                  </Row>
+                </Card>
+              </div>
+            ))}
           </div>
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Search Flights
-        </Button>
-      </Form>
-      <h3 className="mt-4">Available Flights</h3>
-      {flights.length > 0 ? (
-        flights.map((flight) => (
-          <Card key={flight._id} className="mb-3">
-            <Card.Body>
-              <Card.Title>{flight.airline}</Card.Title>
-              <Card.Text>
-                Flight Number: {flight.flightNumber}
-                <br />
-                Departure: {flight.departure}
-                <br />
-                Arrival: {flight.arrival}
-                <br />
-                Departure Time:{" "}
-                {new Date(flight.departureTime).toLocaleString()}
-                <br />
-                Arrival Time: {new Date(flight.arrivalTime).toLocaleString()}
-                <br />
-                Price: ${flight.price}
-              </Card.Text>
-              <Button variant="success" onClick={() => handleBook(flight)}>
-                Book Flight
-              </Button>
-            </Card.Body>
-          </Card>
-        ))
-      ) : (
-        <p>No flights found.</p>
+        </div>
       )}
+
+      {/* No Results Message */}
+      {!loading &&
+        flights.length === 0 &&
+        origin &&
+        destination &&
+        departure && (
+          <div className="mt-5">
+            <Card className="flight-card">
+              <Card.Body className="text-center">
+                <div style={{ fontSize: "4rem", marginBottom: "1rem" }}>✈️</div>
+                <h4>No Flights Found</h4>
+                <p className="text-muted">
+                  No flights available for the selected criteria. Please try
+                  different dates or routes.
+                </p>
+              </Card.Body>
+            </Card>
+          </div>
+        )}
     </div>
   );
 };

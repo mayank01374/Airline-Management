@@ -10,7 +10,10 @@ const bookingSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: true },
-  address: { type: String, required: true },
+  age: { type: Number },
+  gender: { type: String },
+  paymentMethod: { type: String },
+  address: { type: String },
   bookingDate: { type: Date, default: Date.now },
 });
 

@@ -1,49 +1,649 @@
+/* Modern FlyHigh - Skyscanner Style Theme */
+
+/* Import modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global Reset and Base Styles */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  height: 100%;
   margin: 0;
-  font-family: Arial, sans-serif;
-  color: #fff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  min-height: 100vh;
+  color: #333;
+  line-height: 1.6;
+  position: relative;
+  padding-top: 70px; /* prevent navbar from overlapping content */
 }
 
+
+
+/* Remove any overlay effects */
+.overlay,
+.hero::before,
+.bg-overlay {
+  background: none !important;
+}
+
+/* Modern Container Styles */
 .container {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 0;
 }
 
+/* Modern Navbar Styling */
 .navbar {
-  background-color: #003366 !important;
-  border-color: #003366 !important;
+  background-color: rgba(0, 51, 102, 0.85) !important; /* translucent blue */
+  border: none !important;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand, .nav-link {
+.navbar-brand img {
+  height: 40px; /* smaller logo for thinner navbar */
+}
+
+.navbar-nav .nav-link {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: rgba(255, 255, 255, 0.9) !important; /* white text for dark background */
+}
+
+.navbar-nav .nav-link:hover {
   color: #ffffff !important;
 }
 
+.navbar-brand {
+  color: #ffffff !important; /* white text for dark background */
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.navbar-brand {
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  color: #00bfff !important;
+  text-decoration: none;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin: 0 0.25rem;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Modern Search Card */
+.search-card {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+  max-width: 700px;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.search-card h2 {
+  color: #001f3f !important;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Modern Form Controls */
 .form-control {
   background-color: #ffffff !important;
-  border-color: #cccccc !important;
-  color: #000 !important;
+  border: 2px solid #e1e8ed !important;
+  border-radius: 12px !important;
+  color: #333 !important;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+  font-weight: 400;
+}
+
+.form-control:focus {
+  border-color: #00bfff !important;
+  box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1) !important;
+  outline: none;
 }
 
 .form-control::placeholder {
-  color: #999 !important;
+  color: #6c757d !important;
+  font-weight: 400;
 }
 
-h2 {
-  color: #ffffff !important;
+.form-label {
+  color: #001f3f !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.card {
-  background-color: rgba(255, 255, 255, 0.8);
+/* Modern Select Styling */
+.css-13cymwt-control,
+.css-t3ipsp-control {
+  border: 2px solid #e1e8ed !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  min-height: 48px;
+}
+
+.css-13cymwt-control:hover,
+.css-t3ipsp-control:hover {
+  border-color: #00bfff !important;
+}
+
+.css-1dimb5e-singleValue {
+  color: #333 !important;
+  font-weight: 500;
+}
+
+.css-1jqq78o-placeholder {
+  color: #6c757d !important;
+}
+
+/* Modern Buttons */
+.btn {
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
 }
 
 .btn-primary {
-  background-color: #0055a5 !important;
-  border-color: #0055a5 !important;
+  background: linear-gradient(135deg, #0055a5 0%, #0077cc 100%) !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(0, 85, 165, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #004080 0%, #0055a5 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 85, 165, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline-primary {
+  border: 2px solid #0055a5 !important;
+  color: #0055a5 !important;
+  background: transparent !important;
+}
+
+.btn-outline-primary:hover {
+  background: #0055a5 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #218838 0%, #1e7e34 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+/* Passenger Counter Styling */
+.passenger-counter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  background: #f8f9fa;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #e1e8ed;
+  justify-content: flex-start;
+}
+
+.passenger-counter > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.passenger-counter .btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Swap button alignment */
+.swap-btn-col {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Flight Cards */
+.flight-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.flight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.flight-card .card-body {
+  padding: 1.5rem;
+}
+
+.flight-card .card-title {
+  color: #001f3f;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.flight-card .card-text {
+  color: #6c757d;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Alert Styling */
+.alert {
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+}
+
+.alert-info {
+  background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+  color: white;
+}
+
+/* Loading Spinner */
+.spinner-border {
+  color: #00bfff;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: #001f3f;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .search-card {
+    max-width: 98vw;
+    padding: 1.5rem 0.5rem;
+  }
+  .main-center-wrapper {
+    padding-top: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .search-card {
+    padding: 1rem 0.2rem;
+    border-radius: 12px;
+  }
+  .passenger-counter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 0.7rem 0.5rem;
+  }
+  .swap-btn-col {
+    align-items: center;
+    margin: 0.5rem 0;
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0055a5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #004080;
+}
+
+/* Center the main content vertically and horizontally */
+.main-center-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 90px;
+  position: relative;
+  z-index: 1;
+}
+
+form .form-label {
+  font-weight: 600;
+  color: #003366;
+}
+
+form .btn-outline-primary {
+  width: 36px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+/* Remove any black background from body */
+/* background-color: #000; */
+
+.hero-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 70px);
+  padding-top: 70px;
+  margin-top: 0;
+  /* background: linear-gradient(to bottom, rgba(0, 51, 102, 0.6), transparent), url('/images/background.jpg') no-repeat center center; */
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.btn-outline-primary.active,
+.btn-primary {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+}
+
+.flight-search-card {
+  background: white;
+  border-radius: 1.25rem;
+  border: none;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.flight-search-card input,
+.flight-search-card select,
+.flight-search-card .form-control {
+  border-radius: 10px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+}
+
+.flight-search-card .form-label {
+  font-weight: 600;
+}
+
+.flight-search-card .form-check {
+  font-weight: 500;
+  color: #003366;
+}
+
+/* Flight Card Enhancements */
+.card .btn {
+  white-space: nowrap;
+}
+
+.card {
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+/* Booking Form Specific Styling */
+.booking-form-wrapper {
+  padding-top: 0.5rem;
+  margin-top: 0;
+}
+
+/* Reduce top margin for booking page */
+.container.mt-3 {
+  margin-top: 0.5rem !important;
+}
+
+/* Google Sign-In Button Styles */
+.gsi-material-button {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-appearance: none;
+  background-color: #f2f2f2;
+  background-image: none;
+  border: none;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #1f1f1f;
+  cursor: pointer;
+  font-family: 'Roboto', arial, sans-serif;
+  font-size: 14px;
+  height: 40px;
+  letter-spacing: 0.25px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 12px;
+  position: relative;
+  text-align: center;
+  -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
+  transition: background-color .218s, border-color .218s, box-shadow .218s;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+  max-width: 400px;
+  min-width: min-content;
+}
+
+.gsi-material-button .gsi-material-button-icon {
+  height: 20px;
+  margin-right: 12px;
+  min-width: 20px;
+  width: 20px;
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+  -webkit-align-items: center;
+  align-items: center;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  height: 100%;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  font-family: 'Roboto', arial, sans-serif;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+.gsi-material-button .gsi-material-button-state {
+  -webkit-transition: opacity .218s;
+  transition: opacity .218s;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.gsi-material-button:disabled {
+  cursor: default;
+  background-color: #ffffff61;
+}
+
+.gsi-material-button:disabled .gsi-material-button-state {
+  background-color: #1f1f1f1f;
+}
+
+.gsi-material-button:disabled .gsi-material-button-contents {
+  opacity: 38%;
+}
+
+.gsi-material-button:disabled .gsi-material-button-icon {
+  opacity: 38%;
+}
+
+.gsi-material-button:not(:disabled):active .gsi-material-button-state, 
+.gsi-material-button:not(:disabled):focus .gsi-material-button-state {
+  background-color: #001d35;
+  opacity: 12%;
+}
+
+.gsi-material-button:not(:disabled):hover {
+  -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+}
+
+.gsi-material-button:not(:disabled):hover .gsi-material-button-state {
+  background-color: #001d35;
+  opacity: 8%;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.form-container input {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.form-container button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+}
+.error-msg {
+  background: #dc3545;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.profile-container,
+.profile-container * {
+  color: #222 !important;
 }

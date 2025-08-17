@@ -1,103 +1,306 @@
-# Airline Management and Booking App
+# Airline Management System
 
-This project is an airline management and booking application that streamlines flight scheduling, seat reservations, and customer interactions. The application includes features such as real-time flight status updates, secure payment processing, personalized booking options, and a notification system to enhance the overall travel experience for users.
+A comprehensive web-based airline booking and management platform built with React.js frontend and Node.js backend. This system provides a complete solution for flight search, booking, user authentication, and flight status tracking.
 
-## Table of Contents
+## Project Overview
 
-- [Features](#features)
-- [Setup and Installation](#setup-and-installation)
-- [Usage](#usage)
-- [Image Credits](#image-credits)
-- [License](#license)
+The Airline Management System is a full-stack web application that simulates a real-world airline booking platform. It features a modern, responsive user interface with robust backend services for managing flights, bookings, and user accounts.
+
+## Architecture
+
+The project follows a client-server architecture with separate frontend and backend applications:
+
+- **Frontend**: React.js application with Bootstrap UI components
+- **Backend**: Node.js/Express.js REST API
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: Firebase Authentication (Google Sign-in and Email/Password)
+- **State Management**: React Hooks and Context API
 
 ## Features
 
-- **Flight Search and Booking**: Users can search for flights based on their destination, travel dates, and preferences.
-  
-  ![Screenshot 2024-06-15 182915](https://github.com/mayank01374/Airline-Management/assets/133500570/e05d48be-c72d-4c4d-b6fe-61b2cd12c5da)
-  
-- **User Profiles**: Users can create profiles to store personal information, travel preferences, and past booking history.
- 
-  ![Screenshot 2024-06-15 183048](https://github.com/mayank01374/Airline-Management/assets/133500570/cbcad324-ecfd-495b-aeea-0ff670bc107e)
-  
-- **Real-time Flight Information**: Provides real-time updates on flight availability, schedules, and prices.
-  
-- **Reviews and Ratings**: Users can leave reviews and ratings for airlines and flights they have booked.
-  
-  ![Screenshot 2024-06-15 183227](https://github.com/mayank01374/Airline-Management/assets/133500570/8bc2fa98-f0df-4ef4-bdc0-73820ee65b2e)
-  
-- **Notification System**: Sends alerts and reminders about upcoming flights, check-in deadlines, and other important travel-related information.
-  
-  ![Screenshot 2024-06-15 183344](https://github.com/mayank01374/Airline-Management/assets/133500570/bc476a22-62d6-458c-beee-56f837161fd6)
-  
+### Core Functionality
 
-## Setup and Installation
+- **Flight Search**: Advanced search with filters for origin, destination, dates, and passenger count
+- **Flight Booking**: Complete booking workflow with passenger information collection
+- **User Authentication**: Secure login/signup with Firebase integration
+- **Flight Status**: Real-time flight status tracking
+- **User Profile Management**: Personal information and booking history
+- **Responsive Design**: Mobile-friendly interface across all devices
+
+### Technical Features
+
+- **Real-time Data**: Dynamic flight availability and pricing
+- **Payment Integration**: Multiple payment method support (UPI, Cards, Net Banking)
+- **Booking Confirmation**: Automated booking confirmation system
+- **Error Handling**: Comprehensive error management and user feedback
+- **Data Validation**: Client and server-side validation
+- **Security**: CORS protection and secure API endpoints
+
+## Technology Stack
+
+### Frontend
+
+- React.js 17.0.2
+- React Router DOM 6.23.1
+- React Bootstrap 1.6.8
+- Bootstrap 4.6.2
+- Axios 1.7.2
+- Firebase 11.10.0
+- React Firebase Hooks 5.1.1
+- React Select 5.8.0
+
+### Backend
+
+- Node.js
+- Express.js 4.19.2
+- MongoDB with Mongoose 8.4.1
+- Body Parser 1.20.2
+- CORS 2.8.5
+- Dotenv 16.4.5
+
+### External Services
+
+- Firebase Authentication
+- Google OAuth Integration
+
+## Project Structure
+
+```
+Airline-Management/
+├── airline-frontend/          # React.js frontend application
+│   ├── public/               # Static assets and HTML template
+│   ├── src/
+│   │   ├── components/       # React components
+│   │   ├── firebase.js       # Firebase configuration
+│   │   ├── App.js           # Main application component
+│   │   └── index.js         # Application entry point
+│   └── package.json
+├── airline-backend/          # Node.js backend application
+│   ├── models/              # MongoDB schemas
+│   ├── routes/              # API route handlers
+│   ├── app.js              # Express server configuration
+│   └── package.json
+└── README.md
+```
+
+## Installation and Setup
 
 ### Prerequisites
 
-- Node.js (v16) or use nvm
-- npm or yarn
-- MongoDB
+- Node.js (version 14 or higher)
+- MongoDB (local installation or MongoDB Atlas)
+- npm or yarn package manager
 
-### Installation
+### Backend Setup
 
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/mayank01374/Airline-Management.git
-   cd Airline-Management
-   ```
-
-2. **Backend Setup**
+1. Navigate to the backend directory:
 
    ```bash
    cd airline-backend
-   npm install express mongoose body-parser cors axios
    ```
 
-3. **Frontend Setup**
+2. Install dependencies:
 
    ```bash
-   cd frontend
-   npm install axios bootstrap react-bootstrap
+   npm install
    ```
 
-4. **Environment Variables**
+3. Create a `.env` file in the backend directory with the following variables:
 
-   In the `.env` file in the `airline-backend` directory update the URI to local MongoDB:
-
-   ```env
-   MONGO_URI=your_mongodb_connection_string
+   ```
+   MONGO_URI=mongodb://localhost:27017/airline-management
    PORT=5000
    ```
 
-5. **Run the Backend Server**
+4. Start the backend server:
 
    ```bash
-   cd airline-backend
-   node app.js
-   ```
-
-6. **Run the Frontend Development Server**
-
-   ```bash
-   cd airline-frontend
    npm start
    ```
 
-## Usage
+   For development with auto-restart:
 
-- Open your browser and go to `http://localhost:3000/` to use the application.
-- Use the home page to search for flights based on origin, destination, and departure date.
-- View available flights and book a flight by filling in the required details.
-- Check your profile for stored personal information and booking history.
-- Receive notifications about your upcoming flights.
+   ```bash
+   npm run dev
+   ```
 
-## Image Credits
+### Frontend Setup
 
-- Background image by Ahmed Muntasir(https://www.pexels.com/@ahmedmuntasir/) on Pexels(https://www.pexels.com/photo/gray-airliner-912050/).
+1. Navigate to the frontend directory:
+
+   ```bash
+   cd airline-frontend
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+The application will be available at `http://localhost:3000`
+
+## API Endpoints
+
+### Flight Management
+
+- `GET /api/flights` - Retrieve all flights
+- `POST /api/flightRoutes` - Search flights based on criteria
+
+### User Management
+
+- `POST /api/users/login` - User authentication
+- `GET /api/users/profile` - Get user profile
+
+### Booking Management
+
+- `POST /api/booking` - Create new booking
+- `GET /api/booking/:id` - Get booking details
+
+### Reviews
+
+- `GET /api/reviews` - Get flight reviews
+- `POST /api/reviews` - Submit new review
+
+## Database Schema
+
+### Flight Model
+
+```javascript
+{
+  flightNumber: String,
+  airline: String,
+  departure: String,
+  arrival: String,
+  departureTime: Date,
+  arrivalTime: Date,
+  status: String,
+  price: Number
+}
+```
+
+### Booking Model
+
+```javascript
+{
+  flightId: ObjectId,
+  firstName: String,
+  lastName: String,
+  email: String,
+  phone: String,
+  age: Number,
+  gender: String,
+  paymentMethod: String,
+  address: String,
+  bookingDate: Date
+}
+```
+
+## Key Components
+
+### Frontend Components
+
+- **Home**: Main landing page with flight search functionality
+- **FlightBookingForm**: Complete booking workflow
+- **FlightStatus**: Real-time flight status tracking
+- **Profile**: User profile and booking history
+- **SignIn/SignupPage**: Authentication components
+- **Navbar**: Navigation and user session management
+
+### Backend Routes
+
+- **flightRoutes.js**: Flight search and management
+- **bookingRoutes.js**: Booking creation and management
+- **userRoutes.js**: User authentication and profile
+- **reviews.js**: Review system implementation
+
+## Configuration
+
+### Environment Variables
+
+Backend environment variables should be configured in the `.env` file:
+
+- `MONGO_URI`: MongoDB connection string
+- `PORT`: Server port (default: 5000)
+
+### Firebase Configuration
+
+Firebase configuration is handled in `airline-frontend/src/firebase.js` with the following services:
+
+- Authentication (Google Sign-in, Email/Password)
+- Analytics (optional)
+
+## Development Guidelines
+
+### Code Style
+
+- Use consistent indentation (2 spaces)
+- Follow JavaScript ES6+ conventions
+- Implement proper error handling
+- Add meaningful comments for complex logic
+
+### Testing
+
+- Frontend: React Testing Library
+- Backend: Jest or Mocha
+- API Testing: Postman or similar tools
+
+### Deployment
+
+- Frontend: Build for production using `npm run build`
+- Backend: Use PM2 or similar process manager
+- Database: MongoDB Atlas for cloud deployment
+
+## Security Considerations
+
+- CORS configuration for API access control
+- Input validation on both client and server
+- Secure authentication with Firebase
+- Environment variable protection
+- HTTPS enforcement in production
+
+## Performance Optimization
+
+- React component optimization with proper hooks usage
+- Database query optimization
+- Image and asset compression
+- Lazy loading for better user experience
+
+## Troubleshooting
+
+### Common Issues
+
+1. **MongoDB Connection**: Ensure MongoDB is running and connection string is correct
+2. **Port Conflicts**: Check if ports 3000 (frontend) and 5000 (backend) are available
+3. **Firebase Configuration**: Verify Firebase project settings and API keys
+4. **CORS Errors**: Ensure backend CORS configuration matches frontend URL
+
+### Debug Mode
+
+Enable debug logging by setting environment variables:
+
+```
+DEBUG=express:*
+NODE_ENV=development
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the ISC License.
 
+## Support
+
+For technical support or questions, please refer to the project documentation or create an issue in the repository.

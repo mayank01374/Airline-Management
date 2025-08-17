@@ -1,0 +1,30 @@
+{
+  "name": "airline-management",
+  "version": "1.0.0",
+  "description": "Airline Management and Booking Application",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm install && cd airline-backend && npm install && cd ../airline-frontend && npm install",
+    "backend": "cd airline-backend && npm start",
+    "frontend": "cd airline-frontend && npm start",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "build": "cd airline-frontend && npm run build"
+  },
+  "keywords": [
+    "airline",
+    "booking",
+    "react",
+    "node",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "react-dom": "^19.1.0",
+    "react-firebase-hooks": "^5.1.1"
+  }
+}
